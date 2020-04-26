@@ -1,0 +1,31 @@
+# documentation
+# https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-and-managing-workflow-files-and-runs
+name: graphX CI
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+
+jobs:
+  build:
+    name: graphX build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.16.2]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install packages
+      run: npm ci
+
+    - name: Run CI script
+      run: npm run action

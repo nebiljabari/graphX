@@ -9,10 +9,12 @@
     "npm": ">=6.13.0"
   },
   "scripts": {
+    "action": "npm run validation",
     "lint": "eslint --ignore-pattern=dist --max-warnings=1 .",
     "typescript:watch": "tsc -w",
     "test": "jest",
-    "snyk": "snyk"
+    "snyk": "snyk",
+    "validation": "npm run lint && tsc && npm test"
   },
   "dependencies": {
     "espree": "^6.2.1"
@@ -32,7 +34,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && tsc && npm test && npm run snyk test"
+      "pre-commit": "npm run validation && npm run snyk test"
     }
   },
   "jest": {
