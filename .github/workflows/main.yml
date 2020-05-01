@@ -9,6 +9,24 @@ on:
     branches: [ master, dev ]
 
 jobs:
+  security:
+    name: graphX dependencies check
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Snyk test
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+    - name: Run Snyk monitor
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: monitor
+
   build:
     name: graphX build
     runs-on: ubuntu-latest

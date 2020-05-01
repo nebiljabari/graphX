@@ -59,6 +59,7 @@
       }
     ],
     "no-param-reassign": ["error", { "props": true }],
+    "no-return-await": "error",
     "no-trailing-spaces": "error",
     "no-var": "error",
     "prefer-const": "error",
