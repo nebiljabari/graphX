@@ -10,14 +10,19 @@
   },
   "scripts": {
     "action": "npm run validation",
-    "lint": "eslint --ignore-pattern=dist --max-warnings=1 .",
+    "dev": "nodemon --ignore dist",
+    "debug": "nodemon --inspect",
+    "lint": "eslint --max-warnings=3 .",
     "typescript:watch": "tsc -w",
     "test": "jest",
     "snyk": "snyk",
     "validation": "npm run lint && tsc && npm test"
   },
   "dependencies": {
-    "espree": "^6.2.1"
+    "config": "^3.3.1",
+    "espree": "^6.2.1",
+    "flat": "^5.0.0",
+    "glob": "^7.1.6"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
@@ -29,6 +34,7 @@
     "eslint-plugin-sonarjs": "^0.5.0",
     "husky": "^4.2.5",
     "jest": "^25.4.0",
+    "nodemon": "^2.0.3",
     "snyk": "^1.311.0",
     "typescript": "^3.8.3"
   },
@@ -39,7 +45,8 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "dist"
+      "dist",
+      "mock"
     ]
   },
   "keywords": [

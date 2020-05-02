@@ -1,4 +1,5 @@
 dist
+mock
 node_modules
 
 .DS_STORE

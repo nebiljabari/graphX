@@ -25,7 +25,7 @@
     "no-secrets"
   ],
   "rules": {
-    "complexity": ["error", { "max": 3 }],
+    "complexity": ["error", { "max": 4 }],
     "eqeqeq": ["error", "smart"],
     "global-require": "error",
     "indent": ["error", 2],

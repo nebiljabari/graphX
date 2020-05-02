@@ -1,0 +1,10 @@
+{
+  "glob": {
+    "options": {
+      "ignore": "mock/node_modules"
+    }
+  },
+  "target": {
+    "required": "mock/package.json"
+  }
+}
