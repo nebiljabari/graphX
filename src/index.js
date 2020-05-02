@@ -2,8 +2,8 @@
 const { checkTargetValidity } = require('./check');
 const {
   getFilesName,
+  getMainFolderName,
   getURLsFromConfigFile,
-  //readPackageDotJSON,
   readConfigFile
 } = require('./getter');
 
@@ -14,8 +14,6 @@ async function main() {
     if (error)
       throw new Error(message);
 
-    //readPackageDotJSON();
-
     const filesName = await getFilesName('mock/**/*');
 
     const configFile = readConfigFile(filesName);
@@ -23,10 +21,13 @@ async function main() {
     if (configFile) {
       const urls = getURLsFromConfigFile(configFile);
 
-      console.log('URLS:', urls);
+      const mainFolderName = getMainFolderName();
+
+      console.log({ mainFolderName });
+      console.log({ urls });
     }
 
-    //console.log('files:', filesName);
+    console.log({ filesName });
   } catch (err) {
     console.error(err);
     throw err;

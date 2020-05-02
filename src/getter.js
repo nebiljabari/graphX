@@ -18,6 +18,40 @@ function getFilesName(target = '') {
   });
 }
 
+function getMainFolderNameFromScriptValue(script = '') {
+  if (!script) return '';
+
+  const [folderName] = script
+    .split('=')
+    .join()
+    .split(' ')
+    .filter(value => value.includes('.js'))
+    .map(value => value.split('/')[0]);
+
+  return folderName;
+}
+
+/* eslint-disable-next-line complexity */
+function getMainFolderName() {
+  const { main, scripts } = readPackageDotJSON();
+
+  const mainScripts = {
+    main  : main ? main.split('/')[0] : '',
+    start : getMainFolderNameFromScriptValue(scripts.start),
+    dev   : getMainFolderNameFromScriptValue(scripts.dev)
+  };
+
+  const { start, dev } = mainScripts;
+
+  // @note, should/can be improved
+  if (main && mainScripts.main === start || mainScripts.main === dev)
+    return mainScripts.main;
+  else if (start === dev)
+    return start;
+
+  return start || dev;
+}
+
 function getURLsFromConfigFile(file = {}) {
   const urls = [];
   const prefixe = 'http';
@@ -38,8 +72,7 @@ function readPackageDotJSON() {
 
   const packageDotJSON = fs.readFileSync(required, { encoding: 'utf8' });
 
-  /* eslint-disable-next-line */
-  console.log('PackageDotJSON', JSON.parse(packageDotJSON));
+  return JSON.parse(packageDotJSON);
 }
 
 function readConfigFile(filesName = ['']) {
@@ -69,7 +102,7 @@ function readConfigFile(filesName = ['']) {
 
 module.exports = {
   getFilesName,
+  getMainFolderName,
   getURLsFromConfigFile,
-  readPackageDotJSON,
   readConfigFile
 };
